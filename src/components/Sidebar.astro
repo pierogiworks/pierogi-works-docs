@@ -1,0 +1,168 @@
+---
+import { navItems } from "../data/nav";
+import NavIcon from "./NavIcon.astro";
+
+interface Props {
+	currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+function isActive(href: string, path: string) {
+	if (href === "/") return path === "/";
+	return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<aside class="sidebar">
+	<a class="brand" href="/">
+		<img class="brand__mascot" src="/mascot.png" alt="" width="88" height="82" />
+		<span class="brand__name">Pierogi Works</span>
+		<span class="brand__tag">apps, games & digital goodness</span>
+	</a>
+
+	<nav class="nav" aria-label="Studio guide">
+		<ul>
+			{
+				navItems.map((item) => (
+					<li>
+						<a
+							class:list={["nav__link", { "is-active": isActive(item.href, currentPath) }]}
+							href={item.href}
+							aria-current={isActive(item.href, currentPath) ? "page" : undefined}
+						>
+							<NavIcon name={item.icon} />
+							<span>{item.label}</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+
+	<p class="sidebar__note">
+		Small software. Made with care.
+		<span class="heart" aria-hidden="true">♥</span>
+	</p>
+</aside>
+
+<style>
+	.sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+		width: var(--sidebar-width);
+		min-height: 100vh;
+		padding: 1.5rem 1rem 1.35rem;
+		border-right: 1px solid var(--color-border);
+		background: var(--color-cream);
+		position: sticky;
+		top: 0;
+		align-self: start;
+	}
+
+	.brand {
+		display: grid;
+		justify-items: center;
+		text-align: center;
+		gap: 0.2rem;
+		padding: 0.15rem 0.35rem 0.25rem;
+	}
+
+	.brand__mascot {
+		width: 5.25rem;
+		height: auto;
+		margin-bottom: 0.45rem;
+	}
+
+	.brand__name {
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		line-height: 1.05;
+		color: var(--color-red);
+		text-transform: uppercase;
+		letter-spacing: 0.01em;
+	}
+
+	.brand__tag {
+		font-size: 0.74rem;
+		line-height: 1.35;
+		color: var(--color-muted);
+	}
+
+	.nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.nav__link {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.5rem 0.7rem;
+		border-radius: var(--radius-sm);
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--color-charcoal);
+		transition:
+			background 160ms var(--ease-out),
+			color 160ms var(--ease-out);
+	}
+
+	.nav__link:hover {
+		background: color-mix(in srgb, var(--color-charcoal) 6%, transparent);
+	}
+
+	.nav__link.is-active {
+		background: var(--color-red);
+		color: white;
+	}
+
+	.nav__link.is-active:hover {
+		background: var(--color-red-dark);
+	}
+
+	.sidebar__note {
+		margin-top: auto;
+		padding: 0.75rem 0.4rem 0;
+		font-size: 0.76rem;
+		line-height: 1.4;
+		color: var(--color-muted);
+		text-align: center;
+	}
+
+	.heart {
+		color: var(--color-red);
+		margin-left: 0.15rem;
+	}
+
+	@media (max-width: 900px) {
+		.sidebar {
+			position: relative;
+			width: 100%;
+			min-height: 0;
+			border-right: 0;
+			border-bottom: 1px solid var(--color-border);
+			padding-bottom: 1rem;
+			gap: 1rem;
+		}
+
+		.brand__mascot {
+			width: 4.25rem;
+		}
+
+		.nav ul {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.3rem;
+			justify-content: center;
+		}
+
+		.sidebar__note {
+			display: none;
+		}
+	}
+</style>

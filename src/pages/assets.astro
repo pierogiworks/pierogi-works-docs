@@ -1,0 +1,22 @@
+---
+import DocPage from "../components/DocPage.astro";
+---
+
+<DocPage
+	title="Assets"
+	lede="Canonical files for the mascot, palette, icons, and other shared studio art."
+	sections={[
+		{
+			heading: "Mascot",
+			body: "Primary transparent PNG lives in <code>/public/mascot.png</code>. Hero treatment: <code>/public/mascot-hero.png</code>. Prefer transparent backgrounds over baked-in cream or charcoal.",
+		},
+		{
+			heading: "Export Notes",
+			body: "Ship @2x or SVG where possible. Keep filenames lowercase-hyphenated. Don’t upload cropped screenshots as source art.",
+		},
+		{
+			heading: "Coming Soon",
+			body: "Expanded icon set, social avatars, and print-ready logo packs will land here as the library grows.",
+		},
+	]}
+/>

@@ -1,0 +1,122 @@
+---
+import DocsLayout from "../layouts/DocsLayout.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+	lede: string;
+	sections?: { heading: string; body: string }[];
+}
+
+const { title, description, lede, sections = [] } = Astro.props;
+---
+
+<DocsLayout title={`${title} · Pierogi Works`} description={description ?? lede}>
+	<section class="page-hero">
+		<p class="eyebrow">Studio Guide</p>
+		<h1>{title}</h1>
+		<p class="lede">{lede}</p>
+	</section>
+
+	{
+		sections.length > 0 && (
+			<div class="content">
+				{sections.map((section) => (
+					<section class="block">
+						<h2 id={section.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+							{section.heading}
+						</h2>
+						<p set:html={section.body} />
+					</section>
+				))}
+			</div>
+		)
+	}
+
+	<slot />
+</DocsLayout>
+
+<style>
+	.page-hero {
+		margin: 1.75rem 1.75rem 0;
+		padding: 2.25rem 2.25rem 2rem;
+		border-radius: var(--radius-lg);
+		background: var(--color-charcoal);
+		color: white;
+		animation: fade-up 480ms var(--ease-out) both;
+	}
+
+	.eyebrow {
+		margin-bottom: 0.55rem;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: color-mix(in srgb, var(--color-red) 65%, white);
+	}
+
+	.page-hero h1 {
+		font-size: clamp(2rem, 3.5vw, 2.65rem);
+		margin-bottom: 0.75rem;
+	}
+
+	.lede {
+		max-width: 38rem;
+		color: rgba(255, 252, 247, 0.84);
+		font-size: 1.05rem;
+	}
+
+	.content {
+		display: grid;
+		gap: 1.5rem;
+		padding: 2.25rem 2.5rem 0.5rem;
+		animation: fade-up 560ms 50ms var(--ease-out) both;
+	}
+
+	.block {
+		padding: 0 0 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+		background: transparent;
+		border-radius: 0;
+	}
+
+	.block:last-child {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.block h2 {
+		font-size: 1.25rem;
+		margin-bottom: 0.45rem;
+	}
+
+	.block p {
+		color: color-mix(in srgb, var(--color-ink) 86%, white);
+		max-width: 48rem;
+	}
+
+	.block :global(a) {
+		color: var(--color-red);
+		font-weight: 600;
+	}
+
+	.block :global(code) {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.86em;
+		padding: 0.1em 0.35em;
+		border-radius: 0.3em;
+		background: color-mix(in srgb, var(--color-charcoal) 8%, white);
+	}
+
+	@media (max-width: 900px) {
+		.page-hero {
+			margin-left: 1rem;
+			margin-right: 1rem;
+		}
+
+		.content {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+	}
+</style>

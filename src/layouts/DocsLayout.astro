@@ -1,0 +1,84 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Pierogi Works Studio Guide",
+	description = "Everything we need to build small software with care, personality, and purpose.",
+} = Astro.props;
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="shell">
+			<a class="skip-link" href="#main">Skip to content</a>
+			<Sidebar currentPath={currentPath} />
+			<div class="main-column">
+				<main id="main">
+					<slot />
+				</main>
+				<Footer />
+			</div>
+		</div>
+	</body>
+</html>
+
+<style>
+	.shell {
+		display: grid;
+		grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+		min-height: 100vh;
+	}
+
+	.main-column {
+		min-width: 0;
+		background: var(--color-white);
+	}
+
+	.skip-link {
+		position: absolute;
+		left: 1rem;
+		top: -3rem;
+		z-index: 20;
+		padding: 0.55rem 0.85rem;
+		border-radius: var(--radius-sm);
+		background: var(--color-charcoal);
+		color: white;
+		font-weight: 600;
+		transition: top 160ms var(--ease-out);
+	}
+
+	.skip-link:focus {
+		top: 1rem;
+	}
+
+	@media (max-width: 900px) {
+		.shell {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

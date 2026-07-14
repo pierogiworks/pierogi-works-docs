@@ -1,0 +1,142 @@
+@font-face {
+	font-family: "Cooper Black";
+	src: url("/fonts/Cooper-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--color-red: #d94b3d;
+	--color-red-dark: #c13d31;
+	--color-cream: #f6f1e7;
+	--color-cream-dark: #ebe4d6;
+	--color-charcoal: #2f2f2f;
+	--color-charcoal-soft: #3d3d3d;
+	--color-green: #8fa68d;
+	--color-ink: #2f2f2f;
+	--color-muted: #5c6570;
+	--color-white: #fffcf7;
+	--color-border: rgba(47, 47, 47, 0.12);
+
+	--font-display: "Cooper Black", "Cooper Std", Georgia, serif;
+	--font-body: "Atkinson Hyperlegible", "Helvetica Neue", sans-serif;
+
+	--sidebar-width: 15rem;
+	--radius-sm: 0.4rem;
+	--radius-md: 0.6rem;
+	--radius-lg: 0.85rem;
+	--shadow-soft: 0 8px 24px rgba(47, 47, 47, 0.07);
+
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.65;
+	color: var(--color-ink);
+	background: var(--color-cream);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input,
+textarea {
+	font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-display);
+	font-weight: 400;
+	line-height: 1.12;
+	margin: 0;
+	letter-spacing: 0.01em;
+}
+
+p {
+	margin: 0;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-red);
+	outline-offset: 3px;
+}
+
+::selection {
+	background: color-mix(in srgb, var(--color-red) 28%, white);
+	color: var(--color-charcoal);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+@keyframes fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes draw-rule {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
