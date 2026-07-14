@@ -1,11 +1,3 @@
-@font-face {
-	font-family: "Cooper Black";
-	src: url("/fonts/Cooper-Black.woff2") format("woff2");
-	font-weight: 900;
-	font-style: normal;
-	font-display: swap;
-}
-
 :root {
 	--color-red: #d94b3d;
 	--color-red-dark: #c13d31;

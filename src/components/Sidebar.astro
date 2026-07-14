@@ -1,6 +1,7 @@
 ---
 import { navItems } from "../data/nav";
 import NavIcon from "./NavIcon.astro";
+import { withBase } from "../utils/paths";
 
 interface Props {
 	currentPath: string;
@@ -15,8 +16,8 @@ function isActive(href: string, path: string) {
 ---
 
 <aside class="sidebar">
-	<a class="brand" href="/">
-		<img class="brand__mascot" src="/mascot.png" alt="" width="88" height="82" />
+	<a class="brand" href={withBase("/")}>
+		<img class="brand__mascot" src={withBase("/mascot.png")} alt="" width="88" height="82" />
 		<span class="brand__name">Pierogi Works</span>
 		<span class="brand__tag">apps, games & digital goodness</span>
 	</a>
@@ -28,7 +29,7 @@ function isActive(href: string, path: string) {
 					<li>
 						<a
 							class:list={["nav__link", { "is-active": isActive(item.href, currentPath) }]}
-							href={item.href}
+							href={withBase(item.href)}
 							aria-current={isActive(item.href, currentPath) ? "page" : undefined}
 						>
 							<NavIcon name={item.icon} />

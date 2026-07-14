@@ -1,44 +1,45 @@
 ---
 import DocsLayout from "../layouts/DocsLayout.astro";
 import { brandColors } from "../data/nav";
+import { withBase } from "../utils/paths";
 
 const resources = [
 	{
 		title: "Brand Guidelines",
 		blurb: "Logos, color, and personality rules.",
-		href: "/brand",
+		href: withBase("/brand"),
 		cta: "View Guide",
 		icon: "brand",
 	},
 	{
 		title: "Typography",
 		blurb: "Cooper Black + Atkinson Hyperlegible.",
-		href: "/visuals",
+		href: withBase("/visuals"),
 		cta: "View Guide",
 		icon: "type",
 	},
 	{
 		title: "Asset Library",
 		blurb: "Mascots, icons, and ready-to-use art.",
-		href: "/assets",
+		href: withBase("/assets"),
 		cta: "Browse Assets",
 		icon: "image",
 	},
 	{
 		title: "Templates",
 		blurb: "Docs, decks, and launch checklists.",
-		href: "/templates",
+		href: withBase("/templates"),
 		cta: "View Templates",
 		icon: "doc",
 	},
 ] as const;
 
 const essentials = [
-	{ label: "Voice & Tone", href: "/voice", mark: "arrow" },
-	{ label: "Do’s & Don’ts", href: "/guidelines", mark: "x" },
-	{ label: "File Naming", href: "/guidelines#file-naming", mark: "arrow" },
-	{ label: "Changelog", href: "/changelog", mark: "arrow" },
-	{ label: "Contact & Links", href: "/contact", mark: "arrow" },
+	{ label: "Voice & Tone", href: withBase("/voice"), mark: "arrow" },
+	{ label: "Do’s & Don’ts", href: withBase("/guidelines"), mark: "x" },
+	{ label: "File Naming", href: withBase("/guidelines#file-naming"), mark: "arrow" },
+	{ label: "Changelog", href: withBase("/changelog"), mark: "arrow" },
+	{ label: "Contact & Links", href: withBase("/contact"), mark: "arrow" },
 ] as const;
 ---
 
@@ -51,7 +52,7 @@ const essentials = [
 			</h1>
 			<p>Everything we need to build small software with care, personality, and purpose.</p>
 		</div>
-		<img class="hero__mascot" src="/mascot-hero.png" alt="Pierogi Works mascot holding a keyboard" width="260" height="285" />
+		<img class="hero__mascot" src={withBase("/mascot-hero.png")} alt="Pierogi Works mascot holding a keyboard" width="260" height="285" />
 	</section>
 
 	<section class="intro">
@@ -63,7 +64,7 @@ const essentials = [
 				shared brand rules, assets, and writing habits that keep every project feeling like
 				us.
 			</p>
-			<a class="btn-outline" href="/brand">Our Mission <span aria-hidden="true">›</span></a>
+			<a class="btn-outline" href={withBase("/brand")}>Our Mission <span aria-hidden="true">›</span></a>
 		</div>
 
 		<div class="palette">
